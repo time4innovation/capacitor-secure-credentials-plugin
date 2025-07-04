@@ -1,0 +1,416 @@
+{
+  "api": {
+    "name": "SecureCredentialsPlugin",
+    "slug": "securecredentialsplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "getCredential",
+        "signature": "(options: { service: string; username: string; }) => Promise<Success<Credential> | Failure<SecureCredentialsError>>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ service: string; username: string; }"
+          }
+        ],
+        "returns": "Promise<Success<Credential> | Failure<SecureCredentialsError>>",
+        "tags": [],
+        "docs": "Get a credential matching a service and username if one exists.\nThe user may be challenged to authenticate this request every time it is called.",
+        "complexTypes": [
+          "Success",
+          "Credential",
+          "Failure",
+          "SecureCredentialsError"
+        ],
+        "slug": "getcredential"
+      },
+      {
+        "name": "getUsernames",
+        "signature": "(options: { service: string; }) => Promise<Success<string[]> | Failure<SecureCredentialsError>>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ service: string; }"
+          }
+        ],
+        "returns": "Promise<Failure<SecureCredentialsError> | Success<string[]>>",
+        "tags": [],
+        "docs": "Get all usernames that have credentials stored for a service.",
+        "complexTypes": [
+          "Failure",
+          "SecureCredentialsError",
+          "Success"
+        ],
+        "slug": "getusernames"
+      },
+      {
+        "name": "removeCredential",
+        "signature": "(options: { service: string; username: string; }) => Promise<Success<boolean> | Failure<SecureCredentialsError>>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ service: string; username: string; }"
+          }
+        ],
+        "returns": "Promise<Failure<SecureCredentialsError> | Success<boolean>>",
+        "tags": [],
+        "docs": "Remove a specific credential",
+        "complexTypes": [
+          "Failure",
+          "SecureCredentialsError",
+          "Success"
+        ],
+        "slug": "removecredential"
+      },
+      {
+        "name": "removeCredentials",
+        "signature": "(options: { service: string; }) => Promise<Success<boolean> | Failure<SecureCredentialsError>>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ service: string; }"
+          }
+        ],
+        "returns": "Promise<Failure<SecureCredentialsError> | Success<boolean>>",
+        "tags": [],
+        "docs": "Remove all credentials belonging to a service",
+        "complexTypes": [
+          "Failure",
+          "SecureCredentialsError",
+          "Success"
+        ],
+        "slug": "removecredentials"
+      },
+      {
+        "name": "setCredential",
+        "signature": "(options: { service: string; credential: Credential; options: CredentialOptions; }) => Promise<Success<boolean> | Failure<SecureCredentialsError>>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ service: string; credential: Credential; options: CredentialOptions; }"
+          }
+        ],
+        "returns": "Promise<Failure<SecureCredentialsError> | Success<boolean>>",
+        "tags": [],
+        "docs": "Set a credential into the secure store. This will overwrite any existing credential of the same service and username.",
+        "complexTypes": [
+          "Failure",
+          "SecureCredentialsError",
+          "Success",
+          "Credential",
+          "CredentialOptions"
+        ],
+        "slug": "setcredential"
+      },
+      {
+        "name": "availableSecurityStrategies",
+        "signature": "() => Promise<Success<SecurityStrategy[]> | Failure<SecureCredentialsError>>",
+        "parameters": [],
+        "returns": "Promise<Failure<SecureCredentialsError> | Success<SecurityStrategy[]>>",
+        "tags": [],
+        "docs": "Returns the available strategies for storing credentials, sorted strongest to weakest.",
+        "complexTypes": [
+          "Failure",
+          "SecureCredentialsError",
+          "Success",
+          "SecurityStrategy"
+        ],
+        "slug": "availablesecuritystrategies"
+      },
+      {
+        "name": "supportedBiometricSensors",
+        "signature": "() => Promise<Success<BiometricSensors>>",
+        "parameters": [],
+        "returns": "Promise<Success<BiometricSensors>>",
+        "tags": [],
+        "docs": "Determine the device capabilities for biometric scanning features. A device may have any combination of sensors and the sensors\navailable may change depending on whether a user has granted permission to inspect the device sensors or whether they are enrolled\nwith those sensors. Not all devices advertise what sensors they have. The information gathered is not guaranteed to be 100% accurate.",
+        "complexTypes": [
+          "Success",
+          "BiometricSensors"
+        ],
+        "slug": "supportedbiometricsensors"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "Success",
+      "slug": "success",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "success",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "true"
+        },
+        {
+          "name": "result",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "T"
+          ],
+          "type": "T"
+        }
+      ]
+    },
+    {
+      "name": "Credential",
+      "slug": "credential",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "username",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Failure",
+      "slug": "failure",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "success",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "false"
+        },
+        {
+          "name": "error",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "E"
+          ],
+          "type": "E"
+        }
+      ]
+    },
+    {
+      "name": "SecureCredentialsError",
+      "slug": "securecredentialserror",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "code",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "SecurityErrorCode"
+          ],
+          "type": "SecurityErrorCode"
+        },
+        {
+          "name": "message",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "CredentialOptions",
+      "slug": "credentialoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "strategy",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "SecurityStrategyName"
+          ],
+          "type": "SecurityStrategyName"
+        }
+      ]
+    },
+    {
+      "name": "SecurityStrategy",
+      "slug": "securitystrategy",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "name",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "SecurityStrategyName"
+          ],
+          "type": "SecurityStrategyName"
+        },
+        {
+          "name": "level",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "SecurityLevel"
+          ],
+          "type": "SecurityLevel"
+        },
+        {
+          "name": "biometrics",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "BiometricSensors",
+      "slug": "biometricsensors",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "face",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "fingerprint",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "iris",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "name": "SecurityErrorCode",
+      "slug": "securityerrorcode",
+      "members": [
+        {
+          "name": "FailedToAccess",
+          "value": "'failed to access'",
+          "tags": [],
+          "docs": ""
+        },
+        {
+          "name": "NoData",
+          "value": "'no data'",
+          "tags": [],
+          "docs": ""
+        },
+        {
+          "name": "Unknown",
+          "value": "'unknown'",
+          "tags": [],
+          "docs": ""
+        },
+        {
+          "name": "Unavailable",
+          "value": "'unavailable'",
+          "tags": [],
+          "docs": ""
+        },
+        {
+          "name": "Params",
+          "value": "'params'",
+          "tags": [],
+          "docs": ""
+        }
+      ]
+    },
+    {
+      "name": "SecurityLevel",
+      "slug": "securitylevel",
+      "members": [
+        {
+          "name": "L1_Encrypted",
+          "value": "1",
+          "tags": [],
+          "docs": "The credential will be stored encrypted, but it can be accessed by the application while the device is locked."
+        },
+        {
+          "name": "L2_DeviceUnlocked",
+          "value": "2",
+          "tags": [],
+          "docs": "The credential will be stored encrypted, and it can only be accessed by the application when the\ndevice is unlocked."
+        },
+        {
+          "name": "L3_UserPresence",
+          "value": "3",
+          "tags": [],
+          "docs": "The credential will be stored encrypted, and it can only be accessed by the application after the OS\nconfirms the user is present by means of a challenge. The OS may remember that the user is\npresent for a configured period of time after a device PIN challenge."
+        }
+      ]
+    }
+  ],
+  "typeAliases": [
+    {
+      "name": "SecurityStrategyName",
+      "slug": "securitystrategyname",
+      "docs": "",
+      "types": [
+        {
+          "text": "Opaque<'SecurityStrategyName', string>",
+          "complexTypes": [
+            "Opaque"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Opaque",
+      "slug": "opaque",
+      "docs": "",
+      "types": [
+        {
+          "text": "T & { __TYPE__: K }",
+          "complexTypes": [
+            "T",
+            "K"
+          ]
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}
